@@ -37,7 +37,12 @@ var SearchContainer = React.createClass({
 		// 	end: ''
 		// })
 
-		this.props.setTerm([this.state.topic, this.state.start, this.state.end])
+		this.props.setTerms([this.state.topic, this.state.start, this.state.end])
+		this.setState({
+			topic: '',
+			start: '',
+			end: ''
+		})
 	},
 	render: function() {
 		return (

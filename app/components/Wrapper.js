@@ -16,6 +16,7 @@ var Wrapper = React.createClass({
 	componentDidUpdate: function() {
 
 	// Run the query for the address
+		console.log('Component did update because of search submit')
 	
 	},
 	// This function allows childrens to update the parent.
