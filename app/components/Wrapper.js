@@ -4,6 +4,8 @@ var SearchContainer = require('../containers/SearchContainer')
 var ResultsContainer = require('../containers/ResultsContainer')
 var SavedContainer = require('../containers/SavedContainer')
 
+var nytHelper = require('../utils/nytHelper')
+
 var Wrapper = React.createClass({
 	getInitialState: function() {
 		return {
@@ -17,6 +19,10 @@ var Wrapper = React.createClass({
 
 	// Run the query for the address
 		console.log('Component did update because of search submit')
+		nytHelper.getResults([this.state.topic, this.state.start, this.state.end])
+			.then(function(results) {
+				console.log('RESULTS', results.data.response.docs)
+			})
 	
 	},
 	// This function allows childrens to update the parent.
