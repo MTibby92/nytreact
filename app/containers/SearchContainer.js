@@ -50,7 +50,10 @@ var SearchContainer = React.createClass({
 			onSubmitSearch={this.handleSubmitSearch}
 			onUpdateTopic={this.handleUpdateTopic}
 			onUpdateStart={this.handleUpdateStart}
-			onUpdateEnd={this.handleUpdateEnd} />
+			onUpdateEnd={this.handleUpdateEnd} 
+			topic={this.state.topic}
+			start={this.state.start}
+			end={this.state.end} />
 		)
 	}
 })
