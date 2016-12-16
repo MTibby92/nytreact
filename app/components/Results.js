@@ -77,7 +77,7 @@ var Results = React.createClass({
 										<div className="col-sm-10">{this.props.results[0].headline.main}</div>
 										<div className="col-sm-2">
 											<button 
-												id="button1" 
+												// id="button1" 
 												data-title={this.props.results[0].headline.main}
 												data-published={this.props.results[0].pub_date}
 												data-url={this.props.results[0].web_url}
@@ -90,7 +90,13 @@ var Results = React.createClass({
 									<div className="row">
 										<div className="col-sm-10">{this.props.results[1].headline.main}</div>
 										<div className="col-sm-2">
-											<button className="btn btn-sm btn-block btn-primary">Save</button>
+											<button 
+												// id="button1" 
+												data-title={this.props.results[1].headline.main}
+												data-published={this.props.results[1].pub_date}
+												data-url={this.props.results[1].web_url}
+												onClick={this.props.onArticleSave} 
+												className="btn btn-sm btn-block btn-primary">Save</button>
 										</div>
 									</div>
 								</div>
@@ -98,7 +104,13 @@ var Results = React.createClass({
 									<div className="row">
 										<div className="col-sm-10">{this.props.results[2].headline.main}</div>
 										<div className="col-sm-2">
-											<button className="btn btn-sm btn-block btn-primary">Save</button>
+											<button 
+												// id="button1" 
+												data-title={this.props.results[2].headline.main}
+												data-published={this.props.results[2].pub_date}
+												data-url={this.props.results[2].web_url}
+												onClick={this.props.onArticleSave} 
+												className="btn btn-sm btn-block btn-primary">Save</button>
 										</div>
 									</div>
 								</div>
@@ -106,7 +118,13 @@ var Results = React.createClass({
 									<div className="row">
 										<div className="col-sm-10">{this.props.results[3].headline.main}</div>
 										<div className="col-sm-2">
-											<button className="btn btn-sm btn-block btn-primary">Save</button>
+											<button 
+												// id="button1" 
+												data-title={this.props.results[3].headline.main}
+												data-published={this.props.results[3].pub_date}
+												data-url={this.props.results[3].web_url}
+												onClick={this.props.onArticleSave} 
+												className="btn btn-sm btn-block btn-primary">Save</button>
 										</div>
 									</div>
 								</div>
@@ -114,7 +132,13 @@ var Results = React.createClass({
 									<div className="row">
 										<div className="col-sm-10">{this.props.results[4].headline.main}</div>
 										<div className="col-sm-2">
-											<button className="btn btn-sm btn-block btn-primary">Save</button>
+											<button 
+												// id="button1" 
+												data-title={this.props.results[4].headline.main}
+												data-published={this.props.results[4].pub_date}
+												data-url={this.props.results[4].web_url}
+												onClick={this.props.onArticleSave} 
+												className="btn btn-sm btn-block btn-primary">Save</button>
 										</div>
 									</div>
 								</div>

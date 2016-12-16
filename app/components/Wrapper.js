@@ -12,13 +12,25 @@ var Wrapper = React.createClass({
 			topic: '',
 			start: '',
 			end: '',
-			results: [],
+			searchResults: [],
 			article: {
 				title: '',
 				published: '',
 				url: ''
-			}
+			},
+			savedArticles: []
 		}
+	},
+	componentDidMount: function() {
+		nytHelper.getSaved().then(function(response) {
+			console.log(response.data)
+			if (response.data !== this.state.savedArticles) {
+				console.log('SAVED:', response.data)
+				// this.setState({
+				// 	savedArticles: response.data
+				// })
+			}
+		}.bind(this))
 	},
 	// If the component changes (i.e. if a search is entered)...
 	componentDidUpdate: function(prevProps, prevState) {
@@ -32,10 +44,10 @@ var Wrapper = React.createClass({
 			// console.log('PREV STATE', prevState)
 			nytHelper.getResults([this.state.topic, this.state.start, this.state.end])
 				.then(function(results) {
-					if (results.data.response.docs !== this.state.results) {
+					if (results.data.response.docs !== this.state.searchResults) {
 						console.log('RESULTS', results.data.response.docs)
 						this.setState({
-							results: results.data.response.docs
+							searchResults: results.data.response.docs
 						})
 					}
 				}.bind(this))
@@ -76,12 +88,12 @@ var Wrapper = React.createClass({
 				</div>
 				<div className="row">
 					<div className="col-sm-8 col-sm-offset-2">
-						<ResultsContainer results={this.state.results} saveArticle={this.saveArticle} />
+						<ResultsContainer results={this.state.searchResults} saveArticle={this.saveArticle} />
 					</div>
 				</div>
 				<div className="row">
 					<div className="col-sm-8 col-sm-offset-2">
-						<SavedContainer />
+						<SavedContainer savedArticles={this.state.savedArticles} />
 					</div>
 				</div>								
 			</div>
