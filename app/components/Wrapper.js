@@ -25,10 +25,11 @@ var Wrapper = React.createClass({
 		nytHelper.getSaved().then(function(response) {
 			console.log(response.data)
 			if (response.data !== this.state.savedArticles) {
-				console.log('SAVED:', response.data)
-				// this.setState({
-				// 	savedArticles: response.data
-				// })
+				console.log('componentDidMount SAVED:', response.data)
+				this.setState({
+					savedArticles: response.data,
+					testState: true
+				})
 			}
 		}.bind(this))
 	},
@@ -57,7 +58,19 @@ var Wrapper = React.createClass({
 			console.log('No need to rerun after component update')
 		} else {
 			console.log('Component updated because Article save button was clicked')
-			nytHelper.postSaved(this.state.article)
+			nytHelper.postSaved(this.state.article).then(function() {
+				console.log('Post Complete! Time for the Get')
+				nytHelper.getSaved().then(function(response) {
+					console.log(response.data)
+					if (response.data !== this.state.savedArticles) {
+						console.log('componentDidUpdate SAVED:', response.data)
+						this.setState({
+							savedArticles: response.data,
+							testState: true
+						})
+					}
+				}.bind(this))
+			}.bind(this))
 		}
 	},
 	// This function allows childrens to update the parent.
@@ -70,7 +83,6 @@ var Wrapper = React.createClass({
 	},
 	saveArticle: function(article) {
 		this.setState({
-			saveClick: true,
 			article: {
 				title: article.title,
 				published: article.published,

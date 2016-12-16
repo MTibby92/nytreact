@@ -56,7 +56,7 @@ app.get('/', function(req, res) {
 app.get('/api/saved', function(req, res) {
 	console.log('GET api route initiated')
 	SavedArticles.find({}).sort([
-			["date", "descending"]
+			['published', 'descending']
 		]).limit(5).exec(function(err, doc) {
 			if (err) {
 				console.log(err);

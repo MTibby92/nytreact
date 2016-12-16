@@ -39,7 +39,7 @@ var Saved = React.createClass({
 										data-published={this.props.savedArticles[0].published}
 										data-url={this.props.savedArticles[0].url}
 										onClick={this.props.onArticleSave} 
-										className="btn btn-sm btn-block btn-warn">Delete</button>
+										className="btn btn-sm btn-block btn-danger">Delete</button>
 								</div>
 							</div>
 						</div>
