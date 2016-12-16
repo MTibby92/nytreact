@@ -3,16 +3,50 @@ var PropTypes = React.PropTypes
 
 var Saved = React.createClass({
 	render: function() {
-		return (
-			<div className="panel panel-default">
-				<div className="panel-heading text-center">
-					<h3 className="panel-title">Saved Container</h3>
+		if (this.props.savedArticles.length == 0) {
+			return (
+				<div className="panel panel-default">
+					<div className="panel-heading text-center">
+						<h3 className="panel-title">Saved Container</h3>
+					</div>
+					<div className="panel-body">
+						<div className="well well-sm">
+							<div className="row">
+								<div className="col-sm-10">This is where a Saved Article would appear</div>
+								<div className="col-sm-2">
+									<button  
+										className="btn btn-sm btn-block btn-warn">Delete</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-				<div className="panel-body">
-					Panel content
+			)
+		} else {
+			return (
+				<div className="panel panel-default">
+					<div className="panel-heading text-center">
+						<h3 className="panel-title">Saved Container</h3>
+					</div>
+					<div className="panel-body">
+						<div className="well well-sm">
+							<div className="row">
+								<div className="col-sm-10">{this.props.savedArticles[0].title}</div>
+								<div className="col-sm-2">
+									<button 
+										// id="button1" 
+										data-title={this.props.savedArticles[0].title}
+										data-published={this.props.savedArticles[0].published}
+										data-url={this.props.savedArticles[0].url}
+										onClick={this.props.onArticleSave} 
+										className="btn btn-sm btn-block btn-warn">Delete</button>
+								</div>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-		)
+			)
+		}	
 	}
 })
 

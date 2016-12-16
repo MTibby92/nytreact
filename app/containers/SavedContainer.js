@@ -4,7 +4,7 @@ var Saved = require('../components/Saved')
 var SavedContainer = React.createClass({
 	render: function() {
 		return (
-			<Saved />
+			<Saved savedArticles={this.props.savedArticles} />
 		)
 	}
 })
