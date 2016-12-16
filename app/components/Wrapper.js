@@ -12,7 +12,12 @@ var Wrapper = React.createClass({
 			topic: '',
 			start: '',
 			end: '',
-			results: []
+			results: [],
+			article: {
+				title: '',
+				published: '',
+				url: ''
+			}
 		}
 	},
 	// If the component changes (i.e. if a search is entered)...
@@ -35,6 +40,13 @@ var Wrapper = React.createClass({
 					}
 				}.bind(this))
 		}
+
+		if (prevState.article.title == this.state.article.title) {
+			console.log('No need to rerun after component update')
+		} else {
+			console.log('Component updated because Article save button was clicked')
+			nytHelper.postSaved(this.state.article)
+		}
 	},
 	// This function allows childrens to update the parent.
 	setTerms: function(terms) {
@@ -43,6 +55,16 @@ var Wrapper = React.createClass({
 			start: terms[1],
 			end: terms[2]
 		});
+	},
+	saveArticle: function(article) {
+		this.setState({
+			saveClick: true,
+			article: {
+				title: article.title,
+				published: article.published,
+				url: article.url
+			}
+		})
 	},
 	render: function() {
 		return (
@@ -54,7 +76,7 @@ var Wrapper = React.createClass({
 				</div>
 				<div className="row">
 					<div className="col-sm-8 col-sm-offset-2">
-						<ResultsContainer results={this.state.results} />
+						<ResultsContainer results={this.state.results} saveArticle={this.saveArticle} />
 					</div>
 				</div>
 				<div className="row">

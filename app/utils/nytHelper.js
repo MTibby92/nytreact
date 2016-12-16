@@ -67,6 +67,15 @@ var helpers = {
 			})
 			return axios.get(queryString)
 		}
+	},
+	getSaved: function() {
+		return axios.get('/api/saved')
+	},
+	postSaved: function(article) {
+		return axios.post('/api/saved', {article: article})
+	},
+	deleteSaved: function() {
+
 	}
 }
 
