@@ -45,10 +45,11 @@ var Wrapper = React.createClass({
 			// console.log('PREV STATE', prevState)
 			nytHelper.getResults([this.state.topic, this.state.start, this.state.end])
 				.then(function(results) {
-					if (results.data.response.docs !== this.state.searchResults) {
+					if (results.data.response.docs.slice(0,5) !== this.state.searchResults) {
 						console.log('RESULTS', results.data.response.docs)
+						console.log('CUT RESULTS', results.data.response.docs.slice(0,5))
 						this.setState({
-							searchResults: results.data.response.docs
+							searchResults: results.data.response.docs.slice(0,5)
 						})
 					}
 				}.bind(this))
