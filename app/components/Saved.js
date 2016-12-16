@@ -12,7 +12,7 @@ var Saved = React.createClass({
 
 				{this.props.savedArticles.map(function(article, num) {
 					return (
-						<div className="well well-sm">
+						<div key={num} className="well well-sm">
 							<div className="row">
 								<div className="col-sm-10">{article.title}</div>
 								<div className="col-sm-2">
