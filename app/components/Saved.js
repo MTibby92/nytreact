@@ -14,7 +14,7 @@ var Saved = React.createClass({
 					return (
 						<div key={num} className="well well-sm">
 							<div className="row">
-								<div className="col-sm-10">{article.title}</div>
+								<div className="col-sm-10"><a target="_blank" href={article.url}>{article.title}</a></div>
 								<div className="col-sm-2">
 									<button 
 										// id="button1" 
