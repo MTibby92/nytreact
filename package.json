@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "production": "webpack -p",
     "prod": "NODE_ENV=production node server.js",
-    "start": "webpack-dev-server",
-    "postinstall": "webpack -p"
+    "start": "webpack-dev-server"
   },
   "repository": {
     "type": "git",
