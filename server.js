@@ -86,10 +86,9 @@ app.post('/api/saved', function(req, res) {
 })
 
 app.delete('/api/saved', function(req, res){
-	// console.log(req.article)
-	// console.log(req.body)
-	// console.log(req.body.article)
-	console.log(req)
+	console.log(req.body)
+	console.log(req.body.article)
+
 	SavedArticles.findOne({title: req.body.article.title}, function(err, doc) {
 		if(err) {
 			console.log(err)
