@@ -2,9 +2,10 @@
   "name": "nytreact",
   "version": "1.0.0",
   "description": "",
-  "main": "index_bundle.js",
+  "main": "index.js",
   "scripts": {
     "production": "webpack -p",
+    "prod": "NODE_ENV=production node server.js",
     "start": "webpack-dev-server"
   },
   "repository": {
