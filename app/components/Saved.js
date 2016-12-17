@@ -18,10 +18,11 @@ var Saved = React.createClass({
 								<div className="col-sm-2">
 									<button 
 										// id="button1" 
+										data-index={num}
 										data-title={article.title}
 										data-published={article.published}
 										data-url={article.url}
-										onClick={this.props.onArticleSave} 
+										onClick={this.props.onArticleDelete} 
 										className="btn btn-sm btn-block btn-danger">Delete</button>
 								</div>
 							</div>

@@ -86,7 +86,14 @@ app.post('/api/saved', function(req, res) {
 })
 
 app.delete('/api/saved', function(req, res){
-
+	SavedArticles.findOne({title: req.body.article.title}, function(err, doc) {
+		if(err) {
+			console.log(err)
+		} else {
+			doc.remove()
+			res.send(doc)
+		}
+	})
 })
 
 app.listen(PORT, function () {

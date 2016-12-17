@@ -18,7 +18,8 @@ var Wrapper = React.createClass({
 				published: '',
 				url: ''
 			},
-			savedArticles: []
+			savedArticles: [],
+			deleteArticle: {}
 		}
 	},
 	componentDidMount: function() {
@@ -38,7 +39,7 @@ var Wrapper = React.createClass({
 
 		// Run the query for the address
 		if (prevState.topic == this.state.topic && prevState.start == this.state.start && prevState.end == this.state.end) {
-			console.log('No need to rerun after component update')
+			console.log('No need to rerun after component update 1')
 		} else {
 			console.log('Component did update because of search submit')
 			// console.log('PREV PROPS', prevProps)
@@ -55,8 +56,9 @@ var Wrapper = React.createClass({
 				}.bind(this))
 		}
 
+
 		if (prevState.article.title == this.state.article.title) {
-			console.log('No need to rerun after component update')
+			console.log('No need to rerun after component update 2')
 		} else {
 			console.log('Component updated because Article save button was clicked')
 			nytHelper.postSaved(this.state.article).then(function() {
@@ -66,8 +68,26 @@ var Wrapper = React.createClass({
 					if (response.data !== this.state.savedArticles) {
 						console.log('componentDidUpdate SAVED:', response.data)
 						this.setState({
-							savedArticles: response.data,
-							testState: true
+							savedArticles: response.data
+						})
+					}
+				}.bind(this))
+			}.bind(this))
+		}
+
+
+		if (prevState.deleteArticle == this.state.deleteArticle) {
+			console.log('No need to rerun aftern component updated 3')
+		} else {
+			console.log('Component updated because Saved Article Delete button was clicked')
+			nytHelper.deleteSaved(this.state.deleteArticle).then(function() {
+				console.log('Delete Complete! Time for the Get')
+				nytHelper.getSaved().then(function(response) {
+					console.log(response.data)
+					if (response.data !== this.state.savedArticles) {
+						console.log('componentDidUpdate SAVED:', response.data)
+						this.setState({
+							savedArticles: response.data
 						})
 					}
 				}.bind(this))
@@ -89,6 +109,16 @@ var Wrapper = React.createClass({
 				published: article.published,
 				url: article.url
 			}
+		})
+	},
+	deleteArticle: function(article) {
+		var index = article.index
+		// var next = index + 1
+		// var newSavedArticles = this.state.savedArticles.slice(0,index).concat(array.slice(next))
+
+		this.setState({
+			deleteArticle: this.state.savedArticles[index]
+			// savedArticles: newSavedArticles
 		})
 	},
 	render: function() {
