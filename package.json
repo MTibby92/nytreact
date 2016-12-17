@@ -6,7 +6,7 @@
   "scripts": {
     "prod": "NODE_ENV=production node server.js",
     "start": "webpack-dev-server",
-    "postinstall": "webpack -p",
+    "postinstall": "webpack -p"
   },
   "repository": {
     "type": "git",
