@@ -74,8 +74,8 @@ var helpers = {
 	postSaved: function(article) {
 		return axios.post('/api/saved', {article: article})
 	},
-	deleteSaved: function() {
-
+	deleteSaved: function(article) {
+		return axios.delete('/api/saved', {article: article})
 	}
 }
 

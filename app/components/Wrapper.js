@@ -136,7 +136,7 @@ var Wrapper = React.createClass({
 				</div>
 				<div className="row">
 					<div className="col-sm-8 col-sm-offset-2">
-						<SavedContainer savedArticles={this.state.savedArticles} />
+						<SavedContainer savedArticles={this.state.savedArticles} deleteArticle={this.deleteArticle} />
 					</div>
 				</div>								
 			</div>
