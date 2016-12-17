@@ -5,7 +5,7 @@
   "main": "index_bundle.js",
   "scripts": {
     "production": "webpack -p",
-    "prod": "NODE_ENV=production node server.js",
+    // "prod": "NODE_ENV=production node server.js",
     "start": "webpack-dev-server"
   },
   "repository": {
