@@ -50,7 +50,8 @@ app.set('view engine', 'handlebars')
 // app.use('/', routes)
 
 app.get('/', function(req, res) {
-	res.send(index.html)
+	// res.send(index.html)
+	res.send('./dist/index.html')
 })
 
 app.get('/api/saved', function(req, res) {
