@@ -4,6 +4,9 @@ var apiKey = '88d7c2379a9c422e80de64853cd243b3'
 var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 
 var helpers = {
+	// queries New York Times API; handles each combination of form entries regarding: topic, start year, end year
+	// forces start to be Jan 1st and end to be Dec 31
+	// only returns first page, first 10 hits
 	getResults: function(params) {
 		if (params[0].length > 0 && params[1].length == 0 && params[2].length == 0) {
 			console.log('1')
@@ -68,14 +71,17 @@ var helpers = {
 			return axios.get(queryString)
 		}
 	},
+	// queries get route on server.js; makes call to MongoDB for data
 	getSaved: function() {
 		return axios.get('/api/saved')
 	},
+	// queries post route on server.js; updates MongoDB with new article
 	postSaved: function(article) {
 		return axios.post('/api/saved', {article: article})
 	},
+	// queries delete route on server.js; removes document from MongoDB
+	// needed to use the expanded syntax to pass in the article data so we could search the DB for the title
 	deleteSaved: function(article) {
-		// return axios.delete('/api/saved', {article: article})
 		return axios({
 			method: 'delete',
 			url: '/api/saved',

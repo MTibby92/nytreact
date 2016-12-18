@@ -23,6 +23,7 @@ app.use(bodyParser.text())
 app.use(bodyParser.json({ type: 'application/vnd.api+json' }))
 
 
+// handles web versus local DB connection
 if (process.env.MONGODB_URI) {
 	mongoose.connect(process.env.MONGODB_URI)
 } else {
@@ -39,23 +40,18 @@ db.once('open', function() {
   console.log('Mongoose connection successful.')
 })
 
+
+
 // Serve static content for the app from the 'public' directory in the application directory.
 app.use(express.static(process.cwd() + '/dist'))
 
-// Sets up Handlebars
-app.engine('handlebars', exphbs({defaultLayout: 'main'}))
-app.set('view engine', 'handlebars')
-
-// var routes = require('./controllers/todo_controller.js')
-// app.use('/', routes)
-
+// serves index.html
 app.get('/', function(req, res) {
-	// res.send(index.html)
 	res.send('./dist/index.html')
 })
 
+// pulls first 5 saved articles from the database and sorts by published date
 app.get('/api/saved', function(req, res) {
-	console.log('GET api route initiated')
 	SavedArticles.find({}).sort([
 			['published', 'descending']
 		]).limit(5).exec(function(err, doc) {
@@ -68,10 +64,8 @@ app.get('/api/saved', function(req, res) {
 		})
 })
 
+// adds new article to the database; need to convert date from string to date
 app.post('/api/saved', function(req, res) {
-	console.log('BODY: ' + req.body.article)
-	console.log('date version of published:', typeof Date.parse(req.body.article.published))
-
 	SavedArticles.create({
 		title: req.body.article.title,
 		published: Date.parse(req.body.article.published),
@@ -86,10 +80,8 @@ app.post('/api/saved', function(req, res) {
 	})
 })
 
+// deletes document from database based on title match
 app.delete('/api/saved', function(req, res){
-	console.log(req.body)
-	console.log(req.body.article)
-
 	SavedArticles.findOne({title: req.body.article.title}, function(err, doc) {
 		if(err) {
 			console.log(err)
@@ -99,6 +91,8 @@ app.delete('/api/saved', function(req, res){
 		}
 	})
 })
+
+
 
 app.listen(PORT, function () {
 	console.log('App listening on PORT ' + PORT)

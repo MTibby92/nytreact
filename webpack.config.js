@@ -18,19 +18,6 @@ module.exports = {
 			{test: /\.js$/, exclude: /node_modules/, loader: 'babel-loader', query: {presets: ['react', 'es2015']}}
 		]
 	},
-	plugins: [
-		HtmlWebpackPluginConfig,
-		// new webpack.DefinePlugin({
-		// 	'process.env': {
-		// 		NODE_ENV: JSON.stringify('production')
-		// 	}
-		// }),
-		// new webpack.optimize.UglifyJsPlugin({
-		// 	minimize: true,
-		// 	compress: {
-		// 		warnings: false
-		// 	}
-		// })
-	],
+	plugins: [HtmlWebpackPluginConfig],
 	devtool: 'eval-source-map'
 }
