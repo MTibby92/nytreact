@@ -3,7 +3,13 @@
 
  var Search = React.createClass({
  	propTypes: {
-
+ 		onSubmitSearch: PropTypes.func.isRequired,
+ 		onUpdateTopic: PropTypes.func.isRequired,
+ 		onUpdateStart: PropTypes.func.isRequired,
+ 		onUpdateEnd: PropTypes.func.isRequired,
+ 		topic: PropTypes.string.isRequired,
+ 		start: PropTypes.string.isRequired,
+ 		end: PropTypes.string.isRequired
  	},
  	render: function() {
  		return (

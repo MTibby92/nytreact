@@ -3,11 +3,10 @@ var PropTypes = React.PropTypes
 
 var Results = React.createClass({
 	propTypes: {
-		results: PropTypes.array.isRequired
+		results: PropTypes.array.isRequired,
+		onArticleSave: PropTypes.func.isRequired
 	},
 	render: function() {
-		// console.log(this.props.results)
-		// console.log(this.props)
 		return (
 			<div className="row">
 				<div className="col-sm-12">
@@ -24,7 +23,6 @@ var Results = React.createClass({
 										<div className="col-sm-10"><a target="_blank" href={result.web_url}>{result.headline.main}</a></div>
 										<div className="col-sm-2">
 											<button 
-												// id="button1" 
 												data-title={result.headline.main}
 												data-published={result.pub_date}
 												data-url={result.web_url}

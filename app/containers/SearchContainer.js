@@ -27,16 +27,6 @@ var SearchContainer = React.createClass({
 	},
 	handleSubmitSearch: function(e) {
 		e.preventDefault()
-		// caching the username, back button does not show search terms
-		// var topic = this.state.topic
-		// var start = this.state.start
-		// var end = this.state.end
-		// this.setState({
-		// 	topic: '',
-		// 	start: '',
-		// 	end: ''
-		// })
-
 		this.props.setTerms([this.state.topic, this.state.start, this.state.end])
 		this.setState({
 			topic: '',

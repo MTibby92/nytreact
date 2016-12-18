@@ -2,6 +2,10 @@ var React = require('react')
 var PropTypes = React.PropTypes
 
 var Saved = React.createClass({
+	propTypes: {
+		savedArticles: PropTypes.array.isRequired,
+		onArticleDelete: PropTypes.func.isRequired
+	},
 	render: function() {
 		return (
 			<div className="panel panel-default">

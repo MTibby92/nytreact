@@ -4,11 +4,6 @@ var Saved = require('../components/Saved')
 var SavedContainer = React.createClass({
 	handleArticleDelete: function(e) {
 		e.preventDefault()
-		console.log(e.target)
-		console.log(e.target.getAttribute('data-title'))
-		console.log(e.target.getAttribute('data-published'))
-		console.log(e.target.getAttribute('data-url'))
-		console.log(e.target.getAttribute('data-index'))
 
 		var obj = {
 			title: e.target.getAttribute('data-title'),
@@ -16,7 +11,7 @@ var SavedContainer = React.createClass({
 			url: e.target.getAttribute('data-url'),
 			index: e.target.getAttribute('data-index')
 		}
-
+		
 		this.props.deleteArticle(obj)
 	},
 	render: function() {
