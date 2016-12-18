@@ -9,24 +9,24 @@ var nytHelper = require('../utils/nytHelper')
 var Wrapper = React.createClass({
 	getInitialState: function() {
 		return {
-			topic: '',
-			start: '',
-			end: '',
-			searchResults: [],
-			article: {
+			topic: '', 			// for search component
+			start: '', 			// for search component
+			end: '',    		// for search component
+			searchResults: [],	// for results component		
+			article: {			// from results component to save component
 				title: '',
 				published: '',
 				url: ''
 			},
-			savedArticles: [],
-			deleteArticle: {}
+			savedArticles: [],	// for saved component
+			deleteArticle: {}	// for saved component
 		}
 	},
+	// runs when the component first loads
+	// pulls in saved articles from the database on load
 	componentDidMount: function() {
 		nytHelper.getSaved().then(function(response) {
-			console.log(response.data)
 			if (response.data !== this.state.savedArticles) {
-				console.log('componentDidMount SAVED:', response.data)
 				this.setState({
 					savedArticles: response.data,
 					testState: true
@@ -34,39 +34,29 @@ var Wrapper = React.createClass({
 			}
 		}.bind(this))
 	},
-	// If the component changes (i.e. if a search is entered)...
+	// If the component changes (namely the state changes) (i.e. if a search is entered, article saved, or article deleted)
 	componentDidUpdate: function(prevProps, prevState) {
-
-		// Run the query for the address
+		// checks with old state for search terms; if changed, query NYT for results and update result state to display
 		if (prevState.topic == this.state.topic && prevState.start == this.state.start && prevState.end == this.state.end) {
-			console.log('No need to rerun after component update 1')
+			// does nothing if search terms haven't changed, otherwise query
 		} else {
-			console.log('Component did update because of search submit')
-			// console.log('PREV PROPS', prevProps)
-			// console.log('PREV STATE', prevState)
 			nytHelper.getResults([this.state.topic, this.state.start, this.state.end])
 				.then(function(results) {
 					if (results.data.response.docs.slice(0,5) !== this.state.searchResults) {
-						console.log('RESULTS', results.data.response.docs)
-						console.log('CUT RESULTS', results.data.response.docs.slice(0,5))
 						this.setState({
 							searchResults: results.data.response.docs.slice(0,5)
 						})
 					}
-				}.bind(this))
+				}.bind(this)) // binds are necessary to associate this with the context of the component rather than the function
 		}
 
-
+		// checks with old state for article state; if changed because an article was saved, post it to the database and update the view for saved articles by updating the state
 		if (prevState.article.title == this.state.article.title) {
-			console.log('No need to rerun after component update 2')
+			// if state hasn't changed, do nothing
 		} else {
-			console.log('Component updated because Article save button was clicked')
 			nytHelper.postSaved(this.state.article).then(function() {
-				console.log('Post Complete! Time for the Get')
 				nytHelper.getSaved().then(function(response) {
-					console.log(response.data)
 					if (response.data !== this.state.savedArticles) {
-						console.log('componentDidUpdate SAVED:', response.data)
 						this.setState({
 							savedArticles: response.data
 						})
@@ -75,17 +65,13 @@ var Wrapper = React.createClass({
 			}.bind(this))
 		}
 
-
+		// checks with old state for the deleted article info; if it's changed, run call to delete that article based on title; update saved articles so the deleted article is not displayed
 		if (prevState.deleteArticle == this.state.deleteArticle) {
-			console.log('No need to rerun aftern component updated 3')
+			// if state hasn't changed, do nothing
 		} else {
-			console.log('Component updated because Saved Article Delete button was clicked')
 			nytHelper.deleteSaved(this.state.deleteArticle).then(function() {
-				console.log('Delete Complete! Time for the Get')
 				nytHelper.getSaved().then(function(response) {
-					console.log(response.data)
 					if (response.data !== this.state.savedArticles) {
-						console.log('componentDidUpdate SAVED:', response.data)
 						this.setState({
 							savedArticles: response.data
 						})
@@ -94,7 +80,7 @@ var Wrapper = React.createClass({
 			}.bind(this))
 		}
 	},
-	// This function allows childrens to update the parent.
+	// This function allows state from the search component to update the parent state, so the parent can query
 	setTerms: function(terms) {
 		this.setState({
 			topic: terms[0],
@@ -102,6 +88,7 @@ var Wrapper = React.createClass({
 			end: terms[2]
 		});
 	},
+	// allows state from the results component to update parent state so the parent can query the server to save article
 	saveArticle: function(article) {
 		this.setState({
 			article: {
@@ -111,14 +98,11 @@ var Wrapper = React.createClass({
 			}
 		})
 	},
+	// allows state from the saved component to update parent state so parent can query the server to remove article
 	deleteArticle: function(article) {
 		var index = article.index
-		// var next = index + 1
-		// var newSavedArticles = this.state.savedArticles.slice(0,index).concat(array.slice(next))
-
 		this.setState({
 			deleteArticle: this.state.savedArticles[index]
-			// savedArticles: newSavedArticles
 		})
 	},
 	render: function() {
