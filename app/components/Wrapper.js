@@ -29,7 +29,6 @@ var Wrapper = React.createClass({
 			if (response.data !== this.state.savedArticles) {
 				this.setState({
 					savedArticles: response.data,
-					testState: true
 				})
 			}
 		}.bind(this))

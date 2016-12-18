@@ -1,7 +1,7 @@
 var axios = require('axios')
 
 var apiKey = '88d7c2379a9c422e80de64853cd243b3'
-var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
+// var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 
 var helpers = {
 	// queries New York Times API; handles each combination of form entries regarding: topic, start year, end year
@@ -9,7 +9,7 @@ var helpers = {
 	// only returns first page, first 10 hits
 	getResults: function(params) {
 		if (params[0].length > 0 && params[1].length == 0 && params[2].length == 0) {
-			console.log('1')
+			var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 			queryString += '?' + $.param({
 				'api-key': apiKey,
 				'q': params[0],
@@ -17,7 +17,7 @@ var helpers = {
 			})
 			return axios.get(queryString)
 		} else if (params[0].length == 0 && params[1].length > 0 && params[2].length == 0) {
-			console.log('2')
+			var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 			queryString += '?' + $.param({
 				'api-key': apiKey,
 				'begin_date': params[1] + '0101',
@@ -25,7 +25,7 @@ var helpers = {
 			})
 			return axios.get(queryString)
 		} else if (params[0].length == 0 && params[1].length == 0 && params[2].length > 0) {
-			console.log('3')
+			var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 			queryString += '?' + $.param({
 				'api-key': apiKey,
 				'end_date': params[2] + '1231',
@@ -33,7 +33,7 @@ var helpers = {
 			})
 			return axios.get(queryString)
 		} else if (params[0].length > 0 && params[1].length > 0 && params[2].length == 0) {
-			console.log('4')
+			var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 			queryString += '?' + $.param({
 				'api-key': apiKey,
 				'q': params[0],
@@ -42,7 +42,7 @@ var helpers = {
 			})
 			return axios.get(queryString)
 		} else if (params[0].length > 0 && params[1].length == 0 && params[2].length > 0) {
-			console.log('5')
+			var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 			queryString += '?' + $.param({
 				'api-key': apiKey,
 				'q': params[0],
@@ -51,7 +51,7 @@ var helpers = {
 			})
 			return axios.get(queryString)
 		} else if (params[0].length == 0 && params[1].length > 0 && params[2].length > 0) {
-			console.log('6')
+			var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 			queryString += '?' + $.param({
 				'api-key': apiKey,
 				'begin_date': params[1] + '0101',
@@ -60,7 +60,7 @@ var helpers = {
 			})
 			return axios.get(queryString)
 		} else {
-			console.log('default')
+			var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 			queryString += '?' + $.param({
 				'api-key': apiKey,
 				'q': params[0],
