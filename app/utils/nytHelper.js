@@ -1,7 +1,7 @@
 var axios = require('axios')
 
 var apiKey = '88d7c2379a9c422e80de64853cd243b3'
-var queryString = 'http://api.nytimes.com/svc/search/v2/articlesearch.json'
+var queryString = 'https://api.nytimes.com/svc/search/v2/articlesearch.json'
 
 var helpers = {
 	getResults: function(params) {
